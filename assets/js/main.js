@@ -4,6 +4,14 @@ const Gameboard = () => {
     let oSymbol = "<i class=\"far fa-circle fa-7x\"></i>"
     let movX = true;
 
+    function clear(){
+        for (let i = 0; i < 9; i++){
+            document.getElementById(`row-${i}`).innerHTML = "";
+        }
+        document.getElementById("title-gameboard").innerHTML = "Game Started"
+        board = [null,null,null,null,null,null,null,null,null]
+    }
+
     function move(index){
         let icon = document.getElementById(`row-${index}`);
         if(board[index] === null){
@@ -17,15 +25,9 @@ const Gameboard = () => {
                 movX = !movX;
             }
           console.log(board);
-          console.log("icon set");
         }
         else {
           alert("This place is already taken");
-        }
-        let winner = winstatus()
-        // console.log(`you are the winner: ${winner}`)
-        if (winner !== false) {
-          alert(`you are the winner: ${winner}`)
         }
     }
 
@@ -44,7 +46,13 @@ const Gameboard = () => {
         return whowin;
     }
 
-    return { move, winstatus }
+    function gameFinish(winner){
+        document.getElementById("title-gameboard").innerHTML = `you are the winner ${winner} Game Over`
+        document.getElementById('newgame').innerHTML = '<button onclick=\"Game().startGame()\">New Game</button>'    
+        alert("youre winner")
+    }
+
+    return { move, winstatus, gameFinish, clear }
 }
 
 const DisplayController = () => {
@@ -80,12 +88,11 @@ const Game = () => {
         }
         return true
     }
-    
+
 
     function gameStart(player1, player2) {
         board = Gameboard();
-
-
+        board.clear();
         document.getElementById("row-0").addEventListener("click",(e) => moveTo(0),true)
         document.getElementById("row-1").addEventListener("click",(e) => moveTo(1),true)
         document.getElementById("row-2").addEventListener("click",(e) => moveTo(2),true)
@@ -100,6 +107,10 @@ const Game = () => {
             let winner = board.winstatus();
             if (winner == false){
                 board.move(i);   
+            }
+            winner = board.winstatus();
+            if(winner){
+                board.gameFinish(winner);
             }
         }
     }
