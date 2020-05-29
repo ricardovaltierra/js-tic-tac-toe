@@ -5,9 +5,20 @@ const Gameboard = () => {
     let movX = true;
 
     function move(index){
-        console.log("move to ");
-        console.log(index);
-        if (!winstatus()) {
+        let icon = document.getElementById(`row-${index}`);
+        if (movX) {
+            board[index] = "X";
+            icon.innerHTML = xSymbol;
+            movX = !movX;
+          }else {
+              board[index] = "O";
+              icon.innerHTML = oSymbol;
+              movX = !movX;
+          }
+        console.log(board)
+        
+
+        /*if (winstatus() ===false ) {
           if (board[index] === null) {
             let icon = document.getElementById(`row-${index}`);
             if (movX) {
@@ -28,19 +39,35 @@ const Gameboard = () => {
         else {
           alert("YOU WIN");
         }
-        console.log("---");
+        console.log("---");*/
     }
 
-    let winstatus = () => {
-      if (board[0] === board[1] && board[0] === board[2] && board[2] !== null) {
-        return true;
-      }
-      else {
+    function winstatus(){
+        let winning= [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,4,8],[0,4,8],[2,4,6]]
+
+        winning.forEach( (winning) => {
+            if (board[winning[0]] == "X" && board[winning[1]] == "X" && board[winning[2]] == "X" ){
+                return "X";
+            }
+            if (board[winning[0]] == "O" && board[winning[1]] == "O" && board[winning[2]] == "O" ){
+                return "X";
+            }
+        })
         return false;
-      }
+        
+       /*for (let i=0; i<winnerarray; i++){
+            if (board[winnerarray[i][0]] && board[winnerarray[i][1]] && board[winnerarray[i][2]] === "X"){
+            return "X" 
+        }
+            if (board[winnerarray[i][0]] && board[winnerarray[i][1]] && board[winnerarray[i][2]] === "O" ){
+            return "O"
+        }
+        } 
+    }*/
+
     }
 
-    return { move }
+    return { move, winstatus }
 }
 
 const DisplayController = () => {
@@ -93,7 +120,14 @@ const Game = () => {
         document.getElementById("row-8").addEventListener("click",(e) => moveTo(8),true)
 
         function moveTo(i){
-            board.move(i);
+            let winner = board.winstatus();
+            if (winner == false){
+                board.move(i);
+            }
+            winner = board.winstatus();
+            if (winner){
+                alert(`you are the winner ${winner}`)
+            }
         }
     }
 
