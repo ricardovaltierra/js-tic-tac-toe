@@ -57,18 +57,20 @@ const Game = () => {
     function gameStart(player1, player2) {
         board = Gameboard();
 
-        
-        document.getElementById("row-0").addEventListener("click",moveTo(0),true)
-        document.getElementById("row-1").addEventListener("click",moveTo(1),true)
-        document.getElementById("row-2").addEventListener("click",moveTo(2),true)
-        document.getElementById("row-3").addEventListener("click",moveTo(3),true)
-        document.getElementById("row-4").addEventListener("click",moveTo(4),true)
-        document.getElementById("row-5").addEventListener("click",moveTo(5),true)
-        document.getElementById("row-6").addEventListener("click",moveTo(6),true)
-        document.getElementById("row-7").addEventListener("click",moveTo(7),true)
-        document.getElementById("row-8").addEventListener("click",moveTo(8),true)
 
+        document.getElementById("row-0").addEventListener("click",(e) => moveTo(0),true)
+        document.getElementById("row-1").addEventListener("click",(e) => moveTo(1),true)
+        document.getElementById("row-2").addEventListener("click",(e) => moveTo(2),true)
+        document.getElementById("row-3").addEventListener("click",(e) => moveTo(3),true)
+        document.getElementById("row-4").addEventListener("click",(e) => moveTo(4),true)
+        document.getElementById("row-5").addEventListener("click",(e) => moveTo(5),true)
+        document.getElementById("row-6").addEventListener("click",(e) => moveTo(6),true)
+        document.getElementById("row-7").addEventListener("click",(e) => moveTo(7),true)
+        document.getElementById("row-8").addEventListener("click",(e) => moveTo(8),true)
 
+        function moveTo(i){
+            board.move(i);
+        }
     }
 
 
