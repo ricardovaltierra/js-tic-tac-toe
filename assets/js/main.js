@@ -3,19 +3,43 @@ const Gameboard = () => {
     let xSymbol = "<i class=\"fas fa-times fa-7x\">"
     let oSymbol = "<i class=\"far fa-circle fa-7x\"></i>"
     let movX = true;
+
     function move(index){
         console.log("move to ");
         console.log(index);
-        if (movX) {
-            board[index] = "X"
-            movX = !movX;
-        }else {
-            board[index] = "O"
-            movX = !movX;
+        if (!winstatus()) {
+          if (board[index] === null) {
+            let icon = document.getElementById(`row-${index}`);
+            if (movX) {
+              board[index] = "X";
+              icon.innerHTML = xSymbol;
+              movX = !movX;
+            }else {
+                board[index] = "O";
+                icon.innerHTML = oSymbol;
+                movX = !movX;
+            }
+            console.log(board);
+          }
+          else {
+            alert("This position is taken");  
+          }
         }
-        console.log(board);
-        console.log("---")
+        else {
+          alert("YOU WIN");
+        }
+        console.log("---");
     }
+
+    let winstatus = () => {
+      if (board[0] === board[1] && board[0] === board[2] && board[2] !== null) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     return { move }
 }
 
