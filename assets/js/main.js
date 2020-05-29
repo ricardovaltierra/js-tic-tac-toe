@@ -6,22 +6,8 @@ const Gameboard = () => {
 
     function move(index){
         let icon = document.getElementById(`row-${index}`);
-        if (movX) {
-            board[index] = "X";
-            icon.innerHTML = xSymbol;
-            movX = !movX;
-          }else {
-              board[index] = "O";
-              icon.innerHTML = oSymbol;
-              movX = !movX;
-          }
-        console.log(board)
-        
-
-        /*if (winstatus() ===false ) {
-          if (board[index] === null) {
-            let icon = document.getElementById(`row-${index}`);
-            if (movX) {
+        if(board[index] === null){
+          if (movX) {
               board[index] = "X";
               icon.innerHTML = xSymbol;
               movX = !movX;
@@ -30,41 +16,32 @@ const Gameboard = () => {
                 icon.innerHTML = oSymbol;
                 movX = !movX;
             }
-            console.log(board);
-          }
-          else {
-            alert("This position is taken");  
-          }
+          console.log(board);
+          console.log("icon set");
         }
         else {
-          alert("YOU WIN");
+          alert("This place is already taken");
         }
-        console.log("---");*/
+        let winner = winstatus()
+        // console.log(`you are the winner: ${winner}`)
+        if (winner !== false) {
+          alert(`you are the winner: ${winner}`)
+        }
     }
 
     function winstatus(){
-        let winning= [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,4,8],[0,4,8],[2,4,6]]
+        let winner= [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,4,8],[0,4,8],[2,4,6]]
+        let whowin = false;
 
-        winning.forEach( (winning) => {
-            if (board[winning[0]] == "X" && board[winning[1]] == "X" && board[winning[2]] == "X" ){
-                return "X";
-            }
-            if (board[winning[0]] == "O" && board[winning[1]] == "O" && board[winning[2]] == "O" ){
-                return "X";
-            }
-        })
-        return false;
-        
-       /*for (let i=0; i<winnerarray; i++){
-            if (board[winnerarray[i][0]] && board[winnerarray[i][1]] && board[winnerarray[i][2]] === "X"){
-            return "X" 
-        }
-            if (board[winnerarray[i][0]] && board[winnerarray[i][1]] && board[winnerarray[i][2]] === "O" ){
-            return "O"
-        }
-        } 
-    }*/
-
+        winner.forEach(element =>  {
+          if (board[element[0]] === "X" && board[element[1]] === "X" && board[element[2]] === "X"){
+            whowin = "X";
+          }
+          else if (board[element[0]] === "O" && board[element[1]] === "O" && board[element[2]] === "O"){
+            whowin = "O";
+          }                    
+        });
+        return whowin;
     }
 
     return { move, winstatus }
@@ -122,15 +99,10 @@ const Game = () => {
         function moveTo(i){
             let winner = board.winstatus();
             if (winner == false){
-                board.move(i);
-            }
-            winner = board.winstatus();
-            if (winner){
-                alert(`you are the winner ${winner}`)
+                board.move(i);   
             }
         }
     }
-
 
     return {startGame}
 }
