@@ -56,15 +56,13 @@ const Gameboard = (player1, player2) => {
     return whowin;
   }
 
-  function gameFinish(winner) {
-    winnerName = document.getElementsByClassName("current-player")[0].textContent
+  function gameFinish(winner){
+    let winnerName = player1.getSymbol() === winner ? player1.getName() : player2.getName();
     document.getElementById("title-gameboard").innerHTML = `You are the winner ${winnerName}!`
     document.getElementsByClassName("h3")[0].innerHTML = "";
-    document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().startGame()\">New Game</button>'
-    alert("Winner!")
-  }
+    document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().startGame()\">New Game</button>';  }
 
-  return { move, winstatus, gameFinish, clear, resetGame }
+  return { move, winstatus, gameFinish, clear }
 }
 
 const DisplayController = () => {
@@ -91,10 +89,11 @@ const Game = () => {
     }
   }
 
-  // function resetGame(){
-  //   removeListener();
-  //   startGame();
-  // }
+  function resetGame(){
+    board.clear();
+    removeListener();
+    startGame();
+  }
 
   function validatePlayer() {
     player1 = document.getElementById("player1");
@@ -110,39 +109,38 @@ const Game = () => {
   }
 
   function addListener() {
-    document.getElementById("row-0").addEventListener("click", moveTo)
-    document.getElementById("row-1").addEventListener("click", moveTo)
-    document.getElementById("row-2").addEventListener("click", moveTo)
-    document.getElementById("row-3").addEventListener("click", moveTo)
-    document.getElementById("row-4").addEventListener("click", moveTo)
-    document.getElementById("row-5").addEventListener("click", moveTo)
-    document.getElementById("row-6").addEventListener("click", moveTo)
-    document.getElementById("row-7").addEventListener("click", moveTo)
-    document.getElementById("row-8").addEventListener("click", moveTo)
+    document.getElementById("row-0").addEventListener('click', moveTo, true)
+    document.getElementById("row-1").addEventListener('click', moveTo, true)
+    document.getElementById("row-2").addEventListener('click', moveTo, true)
+    document.getElementById("row-3").addEventListener('click', moveTo, true)
+    document.getElementById("row-4").addEventListener('click', moveTo, true)
+    document.getElementById("row-5").addEventListener('click', moveTo, true)
+    document.getElementById("row-6").addEventListener('click', moveTo, true)
+    document.getElementById("row-7").addEventListener('click', moveTo, true)
+    document.getElementById("row-8").addEventListener('click', moveTo, true)
   }
 
   function removeListener() {
-    document.getElementById("row-0").removeEventListener("click", moveTo)
-    document.getElementById("row-1").removeEventListener("click", moveTo)
-    document.getElementById("row-2").removeEventListener("click", moveTo)
-    document.getElementById("row-3").removeEventListener("click", moveTo)
-    document.getElementById("row-4").removeEventListener("click", moveTo)
-    document.getElementById("row-5").removeEventListener("click", moveTo)
-    document.getElementById("row-6").removeEventListener("click", moveTo)
-    document.getElementById("row-7").removeEventListener("click", moveTo)
-    document.getElementById("row-8").removeEventListener("click", moveTo)
+    document.getElementById("row-0").removeEventListener('click', moveTo, true)
+    document.getElementById("row-1").removeEventListener('click', moveTo, true)
+    document.getElementById("row-2").removeEventListener('click', moveTo, true)
+    document.getElementById("row-3").removeEventListener('click', moveTo, true)
+    document.getElementById("row-4").removeEventListener('click', moveTo, true)
+    document.getElementById("row-5").removeEventListener('click', moveTo, true)
+    document.getElementById("row-6").removeEventListener('click', moveTo, true)
+    document.getElementById("row-7").removeEventListener('click', moveTo, true)
+    document.getElementById("row-8").removeEventListener('click', moveTo, true)
   }
 
   function gameStart(player1, player2) {
     board = Gameboard(player1, player2);
     board.clear();
-    addListener();
     DisplayController().changeName(player1.getName());
+    addListener();
   }
 
   function moveTo(event) {
     let i = event.target.id.slice(event.target.id.search(/\d+/));
-    console.log(player1.symbol)
     let winner = board.winstatus();
     if (!winner) {
       board.move(i);
@@ -150,10 +148,8 @@ const Game = () => {
     winner = board.winstatus();
     if (winner) {
       board.gameFinish(winner);
-      removeListener();
-      DisplayController().changeName("Game Over");
     }
   }
 
-  return { startGame }
+  return { startGame, resetGame }
 }
