@@ -15,6 +15,7 @@ const Gameboard = (player1, player2) => {
   function move(index) {
     let icon = document.getElementById(`row-${index}`);
     if (board[index] === null) {
+      console.log(`Board index: ${board[index]}`);
       if (movX) {
         board[index] = "X";
         if (player1.getSymbol() == "O") {
@@ -60,7 +61,7 @@ const Gameboard = (player1, player2) => {
     let winnerName = player1.getSymbol() === winner ? player1.getName() : player2.getName();
     document.getElementById("title-gameboard").innerHTML = `You are the winner ${winnerName}!`
     document.getElementsByClassName("h3")[0].innerHTML = "";
-    document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().startGame()\">New Game</button>';  }
+    document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().restartGame()\">New Game</button>';  }
 
   return { move, winstatus, gameFinish, clear }
 }
@@ -89,10 +90,16 @@ const Game = () => {
     }
   }
 
-  function resetGame(){
+  function restartGame() {
+    document.getElementsByClassName("h3")[0].innerHTML = `Current turn:&nbsp;<span class="current-player"></span>`;
     board.clear();
     removeListener();
-    startGame();
+  }
+
+  function resetGame() {
+    document.getElementsByClassName("h3")[0].innerHTML = `Current turn:&nbsp;<span class="current-player"></span>`;
+    board.clear();
+    removeListener();
   }
 
   function validatePlayer() {
@@ -151,5 +158,5 @@ const Game = () => {
     }
   }
 
-  return { startGame, resetGame }
+  return { startGame, resetGame, restartGame }
 }
