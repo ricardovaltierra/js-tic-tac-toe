@@ -57,7 +57,8 @@ const Gameboard = (player1, player2) => {
   }
 
   function gameFinish(winner) {
-    document.getElementById("title-gameboard").innerHTML = `You are the winner ${winner}! Game Over`
+    document.getElementById("title-gameboard").innerHTML = `You are the winner ${winner}!`
+    document.getElementsByClassName("current-player")[0].innerHTML = "";
     document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().startGame()\">New Game</button>'
     alert("youre winner")
   }
@@ -67,7 +68,7 @@ const Gameboard = (player1, player2) => {
 
 const DisplayController = () => {
   function changeName(name){
-    document.getElementsByClassName("current-player")[0].innerHTML = name;
+    document.getElementsByClassName("current-player")[0].innerHTML = (name === "Game Over")? `${name}` : `Current turn: ${name}`;
   }
   return {changeName };
 }
@@ -144,7 +145,7 @@ const Game = () => {
     if (winner) {
       board.gameFinish(winner);
       removeListener();
-      DisplayController().changeName("Game OVer");
+      DisplayController().changeName("Game Over");
     }
   }
 

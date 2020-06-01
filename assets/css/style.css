@@ -12,7 +12,17 @@ body {
 
 .title-cont {
   position: relative;
+  margin-top: 35px;
   margin-bottom: 35px;
+}
+
+#title-gameboard {
+  margin-top: -15px;
+}
+
+.player {
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
 /* User form */
