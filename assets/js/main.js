@@ -57,18 +57,19 @@ const Gameboard = (player1, player2) => {
   }
 
   function gameFinish(winner) {
-    document.getElementById("title-gameboard").innerHTML = `You are the winner ${winner}!`
-    document.getElementsByClassName("current-player")[0].innerHTML = "";
+    winnerName = document.getElementsByClassName("current-player")[0].textContent
+    document.getElementById("title-gameboard").innerHTML = `You are the winner ${winnerName}!`
+    document.getElementsByClassName("h3")[0].innerHTML = "";
     document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().startGame()\">New Game</button>'
-    alert("youre winner")
+    alert("Winner!")
   }
 
-  return { move, winstatus, gameFinish, clear }
+  return { move, winstatus, gameFinish, clear, resetGame }
 }
 
 const DisplayController = () => {
   function changeName(name){
-    document.getElementsByClassName("current-player")[0].innerHTML = (name === "Game Over")? `${name}` : `Current turn: ${name}`;
+    document.getElementsByClassName("current-player")[0].innerHTML = name;
   }
   return {changeName };
 }
@@ -89,6 +90,11 @@ const Game = () => {
       gameStart(player1, player2);
     }
   }
+
+  // function resetGame(){
+  //   removeListener();
+  //   startGame();
+  // }
 
   function validatePlayer() {
     player1 = document.getElementById("player1");
