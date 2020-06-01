@@ -89,11 +89,7 @@ const Game = () => {
         return true
     }
 
-
-
-    function gameStart(player1, player2) {
-        board = Gameboard();
-        board.clear();
+    function addListener(){
         document.getElementById("row-0").addEventListener("click", moveTo)
         document.getElementById("row-1").addEventListener("click", moveTo)
         document.getElementById("row-2").addEventListener("click", moveTo)
@@ -103,6 +99,24 @@ const Game = () => {
         document.getElementById("row-6").addEventListener("click", moveTo)
         document.getElementById("row-7").addEventListener("click", moveTo)
         document.getElementById("row-8").addEventListener("click", moveTo)
+    }
+
+    function removeListener(){
+        document.getElementById("row-0").removeEventListener("click", moveTo)
+        document.getElementById("row-1").removeEventListener("click", moveTo)
+        document.getElementById("row-2").removeEventListener("click", moveTo)
+        document.getElementById("row-3").removeEventListener("click", moveTo)
+        document.getElementById("row-4").removeEventListener("click", moveTo)
+        document.getElementById("row-5").removeEventListener("click", moveTo)
+        document.getElementById("row-6").removeEventListener("click", moveTo)
+        document.getElementById("row-7").removeEventListener("click", moveTo)
+        document.getElementById("row-8").removeEventListener("click", moveTo)
+    }
+
+    function gameStart(player1, player2) {
+        board = Gameboard();
+        board.clear();
+        addListener();
     }
 
     function moveTo(event){
