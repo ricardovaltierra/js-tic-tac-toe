@@ -1,12 +1,40 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 800px;
+}
+
 .hide {
   display: none;
 }
 
-.red {
-  color: red;
+.title-cont {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+/* User form */
+
+#players-name {
+  border: 1px solid;
+  border-radius: 6px;
+  padding: 35px;
+  width: 40%;
+  height: 320px;
+  margin: 0 auto;
+}
+
+.button, .player2 {
+  margin: 25px 0;
 }
 
 /* TABLE  */
+
+.board-container {
+  margin-bottom: 20px;
+}
 
 .board {
   position: relative;

@@ -47,8 +47,8 @@ const Gameboard = () => {
     }
 
     function gameFinish(winner){
-        document.getElementById("title-gameboard").innerHTML = `you are the winner ${winner} Game Over`
-        document.getElementById('newgame').innerHTML = '<button onclick=\"Game().startGame()\">New Game</button>'    
+        document.getElementById("title-gameboard").innerHTML = `You are the winner ${winner}! Game Over`
+        document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().startGame()\">New Game</button>'
         alert("youre winner")
     }
 
