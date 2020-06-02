@@ -1,164 +1,175 @@
+const DisplayController = () => {
+  const xSymbol = '<i class="fas fa-times fa-7x">';
+  const oSymbol = '<i class="far fa-circle fa-7x"></i>';
+  const sclas = (s) => (s === 'X' ? xSymbol : oSymbol);
+  function changeName(name) {
+    document.getElementsByClassName('current-player')[0].innerHTML = name;
+  }
+
+  function addSymbol(symb, index) {
+    document.getElementById(`row-${index}`).innerHTML = sclas(symb);
+  }
+  return { changeName, addSymbol };
+};
+
 const Gameboard = (player1, player2) => {
-  let board = [null, null, null, null, null, null, null, null, null]
-  let xSymbol = "<i class=\"fas fa-times fa-7x\">"
-  let oSymbol = "<i class=\"far fa-circle fa-7x\"></i>"
+  let board = [null, null, null, null, null, null, null, null, null];
   let movX = true;
 
   function clear() {
-    for (let i = 0; i < 9; i++) {
-      document.getElementById(`row-${i}`).innerHTML = "";
+    for (let i = 0; i < 9; i += 1) {
+      document.getElementById(`row-${i}`).innerHTML = '';
     }
-    document.getElementById("title-gameboard").innerHTML = "Game Started"
-    board = [null, null, null, null, null, null, null, null, null]
-    movX = (player1.getSymbol() == "X") ? true : false;
+    document.getElementById('title-gameboard').innerHTML = 'Game Started';
+    board = [null, null, null, null, null, null, null, null, null];
+    movX = player1.getSymbol() === 'X';
   }
 
   function move(index) {
-    let icon = document.getElementById(`row-${index}`);
     if (board[index] === null) {
-      console.log(`Board index: ${board[index]}`);
       if (movX) {
-        board[index] = "X";
-        if (player1.getSymbol() == "O") {
+        board[index] = 'X';
+        if (player1.getSymbol() === 'O') {
           DisplayController().changeName(player1.getName());
         } else {
           DisplayController().changeName(player2.getName());
         }
-        icon.innerHTML = xSymbol;
+        DisplayController().addSymbol('X', index);
         movX = !movX;
       } else {
-        board[index] = "O";
-        if (player1.getSymbol() == "X") {
+        board[index] = 'O';
+        if (player1.getSymbol() === 'X') {
           DisplayController().changeName(player1.getName());
         } else {
           DisplayController().changeName(player2.getName());
         }
-        icon.innerHTML = oSymbol;
+        DisplayController().addSymbol('O', index);
         movX = !movX;
       }
-      console.log(board);
-    }
-    else {
-      alert("This place is already taken");
+    } else {
+      alert('This place is already taken'); // eslint-disable-line no-alert
     }
   }
 
   function winstatus() {
-    let winner = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 4, 8], [0, 4, 8], [2, 4, 6]]
+    const winner = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 4, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
     let whowin = false;
 
-    winner.forEach(element => {
-      if (board[element[0]] === "X" && board[element[1]] === "X" && board[element[2]] === "X") {
-        whowin = "X";
-      }
-      else if (board[element[0]] === "O" && board[element[1]] === "O" && board[element[2]] === "O") {
-        whowin = "O";
+    winner.forEach((element) => {
+      if (
+        board[element[0]] === 'X'
+        && board[element[1]] === 'X'
+        && board[element[2]] === 'X'
+      ) {
+        whowin = 'X';
+      } else if (
+        board[element[0]] === 'O'
+        && board[element[1]] === 'O'
+        && board[element[2]] === 'O'
+      ) {
+        whowin = 'O';
       }
     });
 
-    if(!board.includes(null)){
+    if (!board.includes(null)) {
       whowin = "It's a Tie!";
     }
-
-    console.log(`Any of the board contains null? ${board.includes(null)}`)
-
     return whowin;
   }
 
-  function gameFinish(winner){
-    let winnerName = player1.getSymbol() === winner ? player1.getName() : player2.getName();
-    if (winner.includes("Tie")){
-      document.getElementById("title-gameboard").innerHTML = winner;
+  function gameFinish(winner) {
+    const winnerName = player1.getSymbol() === winner ? player1.getName() : player2.getName();
+    if (winner.includes('Tie')) {
+      document.getElementById('title-gameboard').innerHTML = winner;
+    } else {
+      document.getElementById(
+        'title-gameboard',
+      ).innerHTML = `You are the winner ${winnerName}!`;
     }
-    else {
-      document.getElementById("title-gameboard").innerHTML = `You are the winner ${winnerName}!`
-    }
-    document.getElementsByClassName("h3")[0].innerHTML = "";
-    document.getElementById('newgame').innerHTML = '<button class="button is-success is-rounded" onclick="Game().newGame()" id="newgame">NewGame</button>';  
+    document.getElementsByClassName('h3')[0].innerHTML = '';
+    document.getElementById('newgame').innerHTML = '<button class="button is-success is-rounded" onclick="Game().newGame()" id="newgame">NewGame</button>';
   }
 
-  return { move, winstatus, gameFinish, clear }
-}
-
-const DisplayController = () => {
-  function changeName(name){
-    document.getElementsByClassName("current-player")[0].innerHTML = name;
-  }
-  return {changeName };
-}
+  return {
+    move,
+    winstatus,
+    gameFinish,
+    clear,
+  };
+};
 
 const Player = (name, symbol) => {
   const getName = () => name;
   const getSymbol = () => symbol;
-  return { getName, getSymbol }
-}
+  return { getName, getSymbol };
+};
+
 
 const Game = () => {
+  function validatePlayer() {
+    const player1 = document.getElementById('player1');
+    const player2 = document.getElementById('player2');
+    if (player1.value === '') {
+      alert('player1 cant be blank'); // eslint-disable-line no-alert
+      return false;
+    }
+    if (player2.value === '') {
+      alert('player2 cant be blank'); // eslint-disable-line no-alert
+      return false;
+    }
+    return true;
+  }
+
+  function gameStart(player1, player2) {
+    board = Gameboard(player1, player2);
+    console.log(board)
+    board.clear();
+    DisplayController().changeName(player1.getName());
+  }
+
   function startGame() {
     if (validatePlayer()) {
-      document.getElementById("players-name").classList.add("hide");
-      document.getElementById("game-board").classList.remove("hide");
-      let p1symbol = document.getElementsByName("symbol")[0].checked ? "X" : "O";
-      let p2symbol = document.getElementsByName("symbol")[0].checked ? "O" : "X"
-      const player1 = Player(document.getElementById("player1").value, p1symbol);
-      const player2 = Player(document.getElementById("player2").value, p2symbol);
+      document.getElementById('players-name').classList.add('hide');
+      document.getElementById('game-board').classList.remove('hide');
+      const p1symbol = document.getElementsByName('symbol')[0].checked
+        ? 'X'
+        : 'O';
+      const p2symbol = document.getElementsByName('symbol')[0].checked
+        ? 'O'
+        : 'X';
+      const player1 = Player(
+        document.getElementById('player1').value,
+        p1symbol,
+      );
+      const player2 = Player(
+        document.getElementById('player2').value,
+        p2symbol,
+      );
       gameStart(player1, player2);
     }
   }
 
   function resetGame() {
-    player = document.getElementById("player1").value;
-    console.log(player);
-    document.getElementsByClassName("h3")[0].innerHTML = `Current turn:&nbsp;<span class="current-player">${player}</span>`;
+    const player = document.getElementById('player1').value;
+    document.getElementsByClassName(
+      'h3',
+    )[0].innerHTML = `Current turn:&nbsp;<span class="current-player">${player}</span>`;
     board.clear();
-    document.getElementById('newgame').innerHTML = "";  
-  }
-
-  function validatePlayer() {
-    player1 = document.getElementById("player1");
-    player2 = document.getElementById("player2");
-    if (player1.value == "") {
-      alert("player1 cant be blank")
-      return false
-    } else if (player2.value == "") {
-      alert("player2 cant be blank")
-      return false
-    }
-    return true
-  }
-
-  function addListener() {
-    document.getElementById("row-0").addEventListener('click', moveTo, true)
-    document.getElementById("row-1").addEventListener('click', moveTo, true)
-    document.getElementById("row-2").addEventListener('click', moveTo, true)
-    document.getElementById("row-3").addEventListener('click', moveTo, true)
-    document.getElementById("row-4").addEventListener('click', moveTo, true)
-    document.getElementById("row-5").addEventListener('click', moveTo, true)
-    document.getElementById("row-6").addEventListener('click', moveTo, true)
-    document.getElementById("row-7").addEventListener('click', moveTo, true)
-    document.getElementById("row-8").addEventListener('click', moveTo, true)
-  }
-
-  function removeListener() {
-    document.getElementById("row-0").removeEventListener('click', moveTo, true)
-    document.getElementById("row-1").removeEventListener('click', moveTo, true)
-    document.getElementById("row-2").removeEventListener('click', moveTo, true)
-    document.getElementById("row-3").removeEventListener('click', moveTo, true)
-    document.getElementById("row-4").removeEventListener('click', moveTo, true)
-    document.getElementById("row-5").removeEventListener('click', moveTo, true)
-    document.getElementById("row-6").removeEventListener('click', moveTo, true)
-    document.getElementById("row-7").removeEventListener('click', moveTo, true)
-    document.getElementById("row-8").removeEventListener('click', moveTo, true)
-  }
-
-  function gameStart(player1, player2) {
-    board = Gameboard(player1, player2);
-    board.clear();
-    DisplayController().changeName(player1.getName());
+    document.getElementById('newgame').innerHTML = '';
   }
 
   function moveTo(event) {
-    let i = event.target.id.slice(event.target.id.search(/\d+/));
+    console.log(board)
+    const i = event.target.id.slice(event.target.id.search(/\d+/));
     let winner = board.winstatus();
     if (!winner) {
       board.move(i);
@@ -169,11 +180,29 @@ const Game = () => {
     }
   }
 
-  function newGame(){
+  function addListener() {
+    document.getElementById('row-0').addEventListener('click', moveTo, true);
+    document.getElementById('row-1').addEventListener('click', moveTo, true);
+    document.getElementById('row-2').addEventListener('click', moveTo, true);
+    document.getElementById('row-3').addEventListener('click', moveTo, true);
+    document.getElementById('row-4').addEventListener('click', moveTo, true);
+    document.getElementById('row-5').addEventListener('click', moveTo, true);
+    document.getElementById('row-6').addEventListener('click', moveTo, true);
+    document.getElementById('row-7').addEventListener('click', moveTo, true);
+    document.getElementById('row-8').addEventListener('click', moveTo, true);
+  }
+
+
+  function newGame() {
     document.location.reload();
   }
 
-  return { startGame, resetGame, addListener, newGame }
-}
+  return {
+    startGame,
+    resetGame,
+    addListener,
+    newGame,
+  };
+};
 
 Game().addListener();
