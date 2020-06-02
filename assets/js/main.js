@@ -96,7 +96,7 @@ const Gameboard = (player1, player2) => {
       ).innerHTML = `You are the winner ${winnerName}!`;
     }
     document.getElementsByClassName('h3')[0].innerHTML = '';
-    document.getElementById('newgame').innerHTML = '<button class="button is-success is-rounded" onclick="Game().newGame()" id="newgame">NewGame</button>';
+    document.getElementById('newgame').innerHTML = '<button class="button is-success is-rounded" onclick="Game.newGame()" id="newgame">NewGame</button>';
   }
 
   return {
@@ -114,8 +114,9 @@ const Player = (name, symbol) => {
 };
 
 
-const Game = () => {
-  function validatePlayer() {
+const Game = (() => {
+  let board = {};
+  const validatePlayer = () => {
     const player1 = document.getElementById('player1');
     const player2 = document.getElementById('player2');
     if (player1.value === '') {
@@ -127,16 +128,15 @@ const Game = () => {
       return false;
     }
     return true;
-  }
+  };
 
-  function gameStart(player1, player2) {
+  const gameStart = (player1, player2) => {
     board = Gameboard(player1, player2);
-    console.log(board)
     board.clear();
     DisplayController().changeName(player1.getName());
-  }
+  };
 
-  function startGame() {
+  const startGame = () => {
     if (validatePlayer()) {
       document.getElementById('players-name').classList.add('hide');
       document.getElementById('game-board').classList.remove('hide');
@@ -156,19 +156,18 @@ const Game = () => {
       );
       gameStart(player1, player2);
     }
-  }
+  };
 
-  function resetGame() {
+  const resetGame = () => {
     const player = document.getElementById('player1').value;
     document.getElementsByClassName(
       'h3',
     )[0].innerHTML = `Current turn:&nbsp;<span class="current-player">${player}</span>`;
     board.clear();
     document.getElementById('newgame').innerHTML = '';
-  }
+  };
 
-  function moveTo(event) {
-    console.log(board)
+  const moveTo = (event) => {
     const i = event.target.id.slice(event.target.id.search(/\d+/));
     let winner = board.winstatus();
     if (!winner) {
@@ -178,9 +177,9 @@ const Game = () => {
     if (winner) {
       board.gameFinish(winner);
     }
-  }
+  };
 
-  function addListener() {
+  const addListener = () => {
     document.getElementById('row-0').addEventListener('click', moveTo, true);
     document.getElementById('row-1').addEventListener('click', moveTo, true);
     document.getElementById('row-2').addEventListener('click', moveTo, true);
@@ -190,12 +189,12 @@ const Game = () => {
     document.getElementById('row-6').addEventListener('click', moveTo, true);
     document.getElementById('row-7').addEventListener('click', moveTo, true);
     document.getElementById('row-8').addEventListener('click', moveTo, true);
-  }
+  };
 
 
-  function newGame() {
+  const newGame = () => {
     document.location.reload();
-  }
+  };
 
   return {
     startGame,
@@ -203,6 +202,6 @@ const Game = () => {
     addListener,
     newGame,
   };
-};
+})();
 
-Game().addListener();
+Game.addListener();
