@@ -55,14 +55,26 @@ const Gameboard = (player1, player2) => {
         whowin = "O";
       }
     });
+
+    if(!board.includes(null)){
+      whowin = "It's a Tie!";
+    }
+
+    console.log(`Any of the board contains null? ${board.includes(null)}`)
+
     return whowin;
   }
 
   function gameFinish(winner){
     let winnerName = player1.getSymbol() === winner ? player1.getName() : player2.getName();
-    document.getElementById("title-gameboard").innerHTML = `You are the winner ${winnerName}!`
+    if (winner.includes("Tie")){
+      document.getElementById("title-gameboard").innerHTML = winner;
+    }
+    else {
+      document.getElementById("title-gameboard").innerHTML = `You are the winner ${winnerName}!`
+    }
     document.getElementsByClassName("h3")[0].innerHTML = "";
-    //document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().restartGame()\">New Game</button>';  
+    document.getElementById('newgame').innerHTML = '<button class="button is-success is-rounded" onclick="Game().newGame()" id="newgame">NewGame</button>';  
   }
 
   return { move, winstatus, gameFinish, clear }
@@ -94,15 +106,12 @@ const Game = () => {
     }
   }
 
-  /* function restartGame() {
-    document.getElementsByClassName("h3")[0].innerHTML = `Current turn:&nbsp;<span class="current-player"></span>`;
-    board.clear();
-    removeListener();
-   }*/
-
   function resetGame() {
-    document.getElementsByClassName("h3")[0].innerHTML = `Current turn:&nbsp;<span class="current-player"></span>`;
+    player = document.getElementById("player1").value;
+    console.log(player);
+    document.getElementsByClassName("h3")[0].innerHTML = `Current turn:&nbsp;<span class="current-player">${player}</span>`;
     board.clear();
+    document.getElementById('newgame').innerHTML = "";  
   }
 
   function validatePlayer() {

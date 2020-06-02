@@ -3,7 +3,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 800px;
+  height: 900px;
 }
 
 .hide {
@@ -36,8 +36,12 @@ body {
   margin: 0 auto;
 }
 
-.button, .player2 {
+.button {
   margin: 25px 0;
+}
+
+.radiobuttons {
+  margin-top: 15px;
 }
 
 /* TABLE  */
@@ -61,4 +65,10 @@ body {
 
 .fas, .far {
   margin: 10% 0;
+}
+
+/* Buttons */
+
+#newgame {
+  margin: 0;
 }
