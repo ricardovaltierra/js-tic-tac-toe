@@ -12,7 +12,7 @@ Have fun losing hours playing on our Tic-Tac-Toe gameboard the times you want. R
 
 
 ## Live Version
-Here: [click](https://github.com/ricardovaltierra/JS-Tic-Tac-Toe/library/index.html)
+Here: [click](https://raw.githack.com/ricardovaltierra/JS-Tic-Tac-Toe/js-pattern-design/index.html)
 
 ## Usage
 ### Register and playing
