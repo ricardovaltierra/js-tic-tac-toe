@@ -10,6 +10,7 @@ const Gameboard = (player1, player2) => {
     }
     document.getElementById("title-gameboard").innerHTML = "Game Started"
     board = [null, null, null, null, null, null, null, null, null]
+    movX = (player1.getSymbol() == "X") ? true : false;
   }
 
   function move(index) {
@@ -61,7 +62,8 @@ const Gameboard = (player1, player2) => {
     let winnerName = player1.getSymbol() === winner ? player1.getName() : player2.getName();
     document.getElementById("title-gameboard").innerHTML = `You are the winner ${winnerName}!`
     document.getElementsByClassName("h3")[0].innerHTML = "";
-    document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().restartGame()\">New Game</button>';  }
+    //document.getElementById('newgame').innerHTML = '<button class=\"button is-success is-rounded\" onclick=\"Game().restartGame()\">New Game</button>';  
+  }
 
   return { move, winstatus, gameFinish, clear }
 }
@@ -84,22 +86,23 @@ const Game = () => {
     if (validatePlayer()) {
       document.getElementById("players-name").classList.add("hide");
       document.getElementById("game-board").classList.remove("hide");
-      const player1 = Player(document.getElementById("player1").value, "X");
-      const player2 = Player(document.getElementById("player2").value, "O");
+      let p1symbol = document.getElementsByName("symbol")[0].checked ? "X" : "O";
+      let p2symbol = document.getElementsByName("symbol")[0].checked ? "O" : "X"
+      const player1 = Player(document.getElementById("player1").value, p1symbol);
+      const player2 = Player(document.getElementById("player2").value, p2symbol);
       gameStart(player1, player2);
     }
   }
 
-  function restartGame() {
+  /* function restartGame() {
     document.getElementsByClassName("h3")[0].innerHTML = `Current turn:&nbsp;<span class="current-player"></span>`;
     board.clear();
     removeListener();
-  }
+   }*/
 
   function resetGame() {
     document.getElementsByClassName("h3")[0].innerHTML = `Current turn:&nbsp;<span class="current-player"></span>`;
     board.clear();
-    removeListener();
   }
 
   function validatePlayer() {
@@ -143,7 +146,6 @@ const Game = () => {
     board = Gameboard(player1, player2);
     board.clear();
     DisplayController().changeName(player1.getName());
-    addListener();
   }
 
   function moveTo(event) {
@@ -158,5 +160,11 @@ const Game = () => {
     }
   }
 
-  return { startGame, resetGame, restartGame }
+  function newGame(){
+    document.location.reload();
+  }
+
+  return { startGame, resetGame, addListener, newGame }
 }
+
+Game().addListener();

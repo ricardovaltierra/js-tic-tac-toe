@@ -20,6 +20,17 @@
           <div class="control">
             <input id="player1" class="input is-primary" type="text" placeholder="player 1">
           </div>
+          <div class="control">
+            <p>Select your Symbol:</p>
+            <label class="radio">
+              <input type="radio" name="symbol" checked>
+              X
+            </label>
+            <label class="radio">
+              <input type="radio" name="symbol">
+              O
+            </label>
+          </div>
         </div>
         <!-- player 2 -->
         <div class="field player2">
@@ -57,8 +68,11 @@
             </tr>
           </table>
         </div>
-        <div id="newgame">
+        <div id="resetgame">
           <button class="button is-danger is-rounded" onclick="Game().resetGame()">Reset the game</button>
+        </div>
+        <div id="newgame">
+          <button class="button is-danger is-rounded" onclick="Game().newGame()">NewGame</button>
         </div>
       </div>
     </div>
