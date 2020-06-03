@@ -58,7 +58,7 @@ const Gameboard = (player1, player2) => {
       [6, 7, 8],
       [0, 3, 6],
       [1, 4, 7],
-      [2, 4, 8],
+      [2, 5, 8],
       [0, 4, 8],
       [2, 4, 6],
     ];
@@ -80,7 +80,7 @@ const Gameboard = (player1, player2) => {
       }
     });
 
-    if (!board.includes(null)) {
+    if (!board.includes(null) && (!whowin)) {
       whowin = "It's a Tie!";
     }
     return whowin;
