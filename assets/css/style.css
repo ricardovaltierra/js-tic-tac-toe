@@ -1,0 +1,74 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 900px;
+}
+
+.hide {
+  display: none;
+}
+
+.title-cont {
+  position: relative;
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
+#title-gameboard {
+  margin-top: -15px;
+}
+
+.player {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+/* User form */
+
+#players-name {
+  border: 1px solid;
+  border-radius: 6px;
+  padding: 35px;
+  width: 40%;
+  height: 320px;
+  margin: 0 auto;
+}
+
+.button {
+  margin: 25px 0;
+}
+
+.radiobuttons {
+  margin-top: 15px;
+}
+
+/* TABLE  */
+
+.board-container {
+  margin-bottom: 20px;
+}
+
+.board {
+  position: relative;
+  width: 50%;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.cell {
+  position: relative;
+  width: 224px;
+  height: 168px;
+}
+
+.fas, .far {
+  margin: 10% 0;
+}
+
+/* Buttons */
+
+#newgame {
+  margin: 0;
+}
