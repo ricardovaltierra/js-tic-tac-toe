@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/70310fb349.js" crossorigin="anonymous"></script>
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <div class="container">
+      <div class="title-cont has-text-centered">
+        <h1 class="title has-text-primary">TIC - TAC - TOE</h1>
+      </div>
+      <div class="input-of-name has-background-primary" id="players-name">
+        <!-- player 1 -->
+        <div class="field">
+          <label for="player1" class="label">Player 1</label>
+          <div class="control">
+            <input id="player1" class="input is-primary" type="text" placeholder="player 1">
+          </div>
+          <div class="control radiobuttons">
+            <!-- <p>Select your Symbol:</p> -->
+            <label class="radio">
+              <p class="has-text-weight-bold has-text-grey">
+                <input type="radio" name="symbol" checked>&nbsp;&nbsp;X
+              </p>
+            </label>
+            <label class="radio">
+              <p class="has-text-weight-bold has-text-grey">
+                <input type="radio" name="symbol">&nbsp;&nbsp;O
+              </p>
+            </label>
+          </div>
+        </div>
+        <!-- player 2 -->
+        <div class="field player2">
+          <label for="player2" class="label">Player 2</label>
+          <div class="control">
+            <input id="player2" class="input is-primary" type="text" placeholder="player 2">
+          </div>
+        </div>
+
+        <div class="control">
+          <button onclick="Game.startGame()" class="button is-primary is-inverted">Start Game!</button>
+        </div>
+      </div>
+
+      <!-- G A M E B O A R D  -->
+      <div class="hide has-text-centered" id="game-board">
+        <h2 class="subtitle has-text-weight-bold" id="title-gameboard">Subtitle</h2>
+        <div class="player"><h3 class="has-text-weight-bold h3">Current turn:&nbsp;<span class="current-player"></span></h3></div>
+        <div class="board-container">
+          <table class="table is-striped board">
+            <tr class="th">
+              <td id="row-0" class="cell has-text-centered is-selected"></td>
+              <td id="row-1" class="cell has-text-centered"></td>
+              <td id="row-2" class="cell has-text-centered is-selected"></td>
+            </tr> 
+            <tr class="th">
+              <td id="row-3" class="cell has-text-centered is-vert"></td>
+              <td id="row-4" class="cell has-text-centered is-selected"></td>
+              <td id="row-5" class="cell has-text-centered"></td>
+            </tr>
+              <tr class="th">
+                <td id="row-6" class="cell is-selected has-text-centered"></td>
+                <td id="row-7" class="cell has-text-centered"></td>
+                <td id="row-8" class="cell has-text-centered is-selected"></td>
+            </tr>
+          </table>
+        </div>
+        <div id="resetgame">
+          <button class="button is-danger is-rounded" onclick="Game.resetGame()">Reset the game</button>
+        </div>
+        <div id="newgame">
+          
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+</html>
