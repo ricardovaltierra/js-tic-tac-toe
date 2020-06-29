@@ -16,10 +16,10 @@ Here: [click](https://raw.githack.com/ricardovaltierra/JS-Tic-Tac-Toe/js-pattern
 
 ## Usage
 ### Register and playing
-<img src="assets/img/usage_1.gif" alt="Delete books and change status" width="400" />
+<img src="src/assets/img/usage_1.gif" alt="Delete books and change status" width="400" />
 
 ### Make a tie and play a new game
-<img src="assets/img/usage_2.gif" alt="register new book" width="400" />
+<img src="src/assets/img/usage_2.gif" alt="register new book" width="400" />
 
 You can clone the repo and run over your personal server.
 

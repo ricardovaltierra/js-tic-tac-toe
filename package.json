@@ -4,7 +4,9 @@
   "description": "JS-Tic-Tac-Toe ============== Microverse Tic-Tac-Toe implemented with JS factory functions and inheritance pattern design",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -18,8 +20,16 @@
   },
   "homepage": "https://github.com/ricardovaltierra/JS-Tic-Tac-Toe#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.10.3",
+    "css-loader": "^3.6.0",
     "eslint": "^7.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "file-loader": "^6.0.0",
+    "jest": "^26.1.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "wepack-cli": "0.0.1-security"
   }
 }
