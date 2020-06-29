@@ -34,14 +34,12 @@ const Game = (() => {
         const p2symbol = document.getElementsByName('symbol')[0].checked
           ? 'O'
           : 'X';
-        const player1 = Player(
-          document.getElementById('player1').value,
-          p1symbol,
-        );
+        const player1 = Player(document.getElementById('player1').value, p1symbol,);
         const player2 = Player(
           document.getElementById('player2').value,
           p2symbol,
         );
+        
         gameStart(player1, player2);
       }
     };
