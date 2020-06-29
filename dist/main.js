@@ -140,7 +140,7 @@ eval("var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst DisplayController = () => {\n    const xSymbol = '<i class=\"fas fa-times fa-7x\">';\n    const oSymbol = '<i class=\"far fa-circle fa-7x\"></i>';\n    const sclas = (s) => (s === 'X' ? xSymbol : oSymbol);\n    function changeName(name) {\n      document.getElementsByClassName('current-player')[0].innerHTML = name;\n    }\n  \n    function addSymbol(symb, index) {\n      document.getElementById(`row-${index}`).innerHTML = sclas(symb);\n    }\n    return { changeName, addSymbol };\n  };\n  \n \n\n  /* harmony default export */ __webpack_exports__[\"default\"] = (DisplayController);\n\n//# sourceURL=webpack:///./src/displayController.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst DisplayController = () => {\n    const xSymbol = '<i class=\"fas fa-times fa-7x\">';\n    const oSymbol = '<i class=\"far fa-circle fa-7x\"></i>';\n    const sclas = (s) => (s === 'X' ? xSymbol : oSymbol);\n    function changeName(name) {\n      document.getElementsByClassName('current-player')[0].innerHTML = name;\n    }\n  \n    function addSymbol(symb, index) {\n      document.getElementById(`row-${index}`).innerHTML = sclas(symb);\n    }\n    return { changeName, addSymbol };\n  };\n  \n  /* harmony default export */ __webpack_exports__[\"default\"] = (DisplayController);\n\n//# sourceURL=webpack:///./src/displayController.js?");
 
 /***/ }),
 

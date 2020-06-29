@@ -12,6 +12,4 @@ const DisplayController = () => {
     return { changeName, addSymbol };
   };
   
- 
-
   export default DisplayController;
