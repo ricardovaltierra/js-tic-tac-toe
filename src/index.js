@@ -1,6 +1,11 @@
 import './assets/css/style.css';
 
-import Game from './game';
-  
-Game.firstAddListener();
-  
+// Player
+
+// Gameboard
+
+// GameLogic
+
+// DisplayController (dom manipulation) set-get data from DOM
+
+// extra-handler -- ??
