@@ -73,7 +73,7 @@ const GameLogic = () => {
     }
     winner = gboard.winstatus();
     if (winner) {
-      setSubtitleLabel(getFinalLabel(winner));
+      setSubtitleLabel(getFinalLabel(winner, gboard));
       endGame();
     }
   }
