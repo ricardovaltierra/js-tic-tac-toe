@@ -1,4 +1,4 @@
-import { validatePlayers, sendAlert } from './helperFunctions';
+import { validatePlayers, sendAlert, getFinalLabel } from './helperFunctions';
 import {
   getP1,
   getP2,
@@ -47,21 +47,6 @@ const GameLogic = () => {
     document.location.reload();
   }
 
-  function getFinalLabel(winner) {
-    if (winner === 'T') {
-      return "It's a Tie!";
-    }
-    if (winner === 'O') {
-      if (gboard.getPlayer2().getSymbol() === 'O') {
-        return `You WIN ${gboard.getPlayer2().getName()}`;
-      }
-      return `You WIN ${gboard.getPlayer1().getName()}`;
-    }
-    if (gboard.getPlayer2().getSymbol() === 'X') {
-      return `You WIN ${gboard.getPlayer2().getName()}`;
-    }
-    return `You WIN ${gboard.getPlayer1().getName()}`;
-  }
 
   function endGame() {
     hidePlayerLabel();
