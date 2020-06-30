@@ -132,6 +132,42 @@ eval("var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/
 
 /***/ }),
 
+/***/ "./src/domHandler.js":
+/*!***************************!*\
+  !*** ./src/domHandler.js ***!
+  \***************************/
+/*! exports provided: getP1, getP2, setPlayerName, hidePlayersName, showGameboard, changeSubtitleLabel, displayTurn */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getP1\", function() { return getP1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getP2\", function() { return getP2; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"setPlayerName\", function() { return setPlayerName; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"hidePlayersName\", function() { return hidePlayersName; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"showGameboard\", function() { return showGameboard; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"changeSubtitleLabel\", function() { return changeSubtitleLabel; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"displayTurn\", function() { return displayTurn; });\n/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./player */ \"./src/player.js\");\n\n\nfunction getP1(){\n  let node = document.querySelector('#player1');\n  let name = node.value;\n  let symbol = document.getElementsByName('symbol')[0].checked ? 'X': 'O';\n  let player = Object(_player__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(name,symbol);\n  return player;\n}\n\nfunction getP2(){\n  let node = document.querySelector('#player2');\n  let name = node.value;\n  let symbol = document.getElementsByName('symbol')[0].checked ? 'O' : 'X';\n  let player = Object(_player__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(name,symbol);\n  return player;\n}\n\nfunction setPlayerName(player){\n  document.querySelector('.current-player').textContent = player.getName();\n}\n\nfunction hidePlayersName(){\n  document.querySelector('#players-name').classList.add('hide');\n}\n\nfunction showGameboard(){\n  document.querySelector('#game-board').classList.remove('hide');\n}\n\nfunction changeSubtitleLabel(text){\n  document.querySelector('#title-gameboard').textContent = text;\n}\n\nfunction displayTurn(player, index){\n  const elem = document.createElement('i');\n  if (player.getSymbol() === 'X'){\n    elem.classList = \"fas fa-times fa-7x\";\n  }else {\n    elem.classList = \"far fa-circle fa-7x\";\n  }\n  document.querySelector(`#row-${index}`).appendChild(elem);\n}\n\n\n//# sourceURL=webpack:///./src/domHandler.js?");
+
+/***/ }),
+
+/***/ "./src/gameboard.js":
+/*!**************************!*\
+  !*** ./src/gameboard.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst Gameboard = (player1, player2) => {\n  let board = [null, null, null, null, null, null, null, null, null];\n\n  const getPlayer2 = () => {\n    return player2;\n  };\n\n  const getPlayer1 = () => {\n    return player1;\n  };\n\n  function winstatus() {\n    const winner = [\n      [0, 1, 2],\n      [3, 4, 5],\n      [6, 7, 8],\n      [0, 3, 6],\n      [1, 4, 7],\n      [2, 5, 8],\n      [0, 4, 8],\n      [2, 4, 6],\n    ];\n    let whowin = false;\n\n    winner.forEach((element) => {\n      if (\n        board[element[0]] === \"X\" &&\n        board[element[1]] === \"X\" &&\n        board[element[2]] === \"X\"\n      ) {\n        whowin = \"X\";\n      } else if (\n        board[element[0]] === \"O\" &&\n        board[element[1]] === \"O\" &&\n        board[element[2]] === \"O\"\n      ) {\n        whowin = \"O\";\n      }\n    });\n\n    if (!board.includes(null) && !whowin) {\n      whowin = \"It's a Tie!\";\n    }\n    return whowin;\n  }\n\n  const gameFinish = (winner) => {\n    console.log(`gamefinish ${winner}`);\n  };\n\n  const validateMove = (index) => {\n    if (board[index] === null) {\n      return true;\n    } else {\n      return false;\n    }\n  };\n\n  const move = (turnP1, index) => {\n    if (turnP1){\n      board[index] = player1.getSymbol();\n    } else {\n      board[index] = player2.getSymbol();\n    }\n  }\n\n  return { getPlayer1, getPlayer2, winstatus, gameFinish, validateMove, move };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Gameboard);\n\n\n//# sourceURL=webpack:///./src/gameboard.js?");
+
+/***/ }),
+
+/***/ "./src/helperFunctions.js":
+/*!********************************!*\
+  !*** ./src/helperFunctions.js ***!
+  \********************************/
+/*! exports provided: validatePlayers, sendAlert */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"validatePlayers\", function() { return validatePlayers; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"sendAlert\", function() { return sendAlert; });\nfunction validatePlayers(player1, player2){\n  if(player1.getName() === \"\" || player2.getName() === \"\"){\n    return false;\n  }\n  return true;\n}\n\nfunction sendAlert(text){\n  alert(text);\n}\n\n//# sourceURL=webpack:///./src/helperFunctions.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -140,7 +176,19 @@ eval("var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _assets_css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/style.css */ \"./src/assets/css/style.css\");\n/* harmony import */ var _assets_css_style_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_css_style_css__WEBPACK_IMPORTED_MODULE_0__);\n\n\n// Player\n\n// Gameboard\n\n// GameLogic\n\n// DisplayController (dom manipulation) set-get data from DOM\n\n// extra-handler -- ??\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _assets_css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/style.css */ \"./src/assets/css/style.css\");\n/* harmony import */ var _assets_css_style_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_css_style_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _helperFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helperFunctions */ \"./src/helperFunctions.js\");\n/* harmony import */ var _domHandler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./domHandler */ \"./src/domHandler.js\");\n/* harmony import */ var _gameboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gameboard */ \"./src/gameboard.js\");\n\n\n\n\n\n\nlet gboard;\nlet p1Move = true;\n\nfunction startGame() {\n  let player1 = Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"getP1\"])();\n  let player2 = Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"getP2\"])();\n  if (Object(_helperFunctions__WEBPACK_IMPORTED_MODULE_1__[\"validatePlayers\"])(player1, player2)) {\n    gboard = Object(_gameboard__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(player1, player2);\n    Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"setPlayerName\"])(player1);\n    Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"hidePlayersName\"])();\n    Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"showGameboard\"])();\n    Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"changeSubtitleLabel\"])(\"Game Started\");\n  } else {\n    Object(_helperFunctions__WEBPACK_IMPORTED_MODULE_1__[\"sendAlert\"])(\"Player's name can't be blank\");\n  }\n}\n\nfunction resetGame() {\n  console.log(\"resetGame\");\n}\n\nfunction newGame() {\n  console.log(\"newGame\");\n}\n\nfunction moveTo(e) {\n  const indx = event.target.id.match(/\\d+/)[0];\n  let winner = gboard.winstatus();\n  if (!winner) {\n    if (gboard.validateMove(indx)) {\n      gboard.move(p1Move, indx);\n      if (p1Move) {\n        Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"displayTurn\"])(gboard.getPlayer1(), indx);\n        Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"setPlayerName\"])(gboard.getPlayer2().getName());\n      } else {\n        Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"displayTurn\"])(gboard.getPlayer2(), indx);\n        Object(_domHandler__WEBPACK_IMPORTED_MODULE_2__[\"setPlayerName\"])(gboard.getPlayer1().getName());\n      }\n      p1Move = !p1Move;\n    } else {\n      Object(_helperFunctions__WEBPACK_IMPORTED_MODULE_1__[\"sendAlert\"])(\"This place is already taken\");\n    }\n  }\n  winner = gboard.winstatus();\n  if (winner) {\n    gboard.gameFinish(winner);\n  }\n}\n\nfunction addAllListeners() {\n  document\n    .querySelector(\".button.is-primary.is-inverted\")\n    .addEventListener(\"click\", startGame);\n  document\n    .querySelector(\".button.is-danger.is-rounded\")\n    .addEventListener(\"click\", resetGame);\n  document.querySelector(\"#newgame .button\").addEventListener(\"click\", newGame);\n  document.getElementById(\"row-0\").addEventListener(\"click\", moveTo);\n  document.getElementById(\"row-1\").addEventListener(\"click\", moveTo);\n  document.getElementById(\"row-2\").addEventListener(\"click\", moveTo);\n  document.getElementById(\"row-3\").addEventListener(\"click\", moveTo);\n  document.getElementById(\"row-4\").addEventListener(\"click\", moveTo);\n  document.getElementById(\"row-5\").addEventListener(\"click\", moveTo);\n  document.getElementById(\"row-6\").addEventListener(\"click\", moveTo);\n  document.getElementById(\"row-7\").addEventListener(\"click\", moveTo);\n  document.getElementById(\"row-8\").addEventListener(\"click\", moveTo);\n}\n\naddAllListeners();\n\n// Player\n// receives -> name, symbol\n// returns -> getName, getSymbol\n\n// validatePlayer\n// receives -> player1, player2\n// returns -> flag (player variables valid)\n\n// gameStart\n// receives -> player1, player2\n// function -> set gameboaard with players, clear board and set dom field\n// returns -> null\n\n// startGame\n// receives -> validatePlayer's flag\n// returns -> send player1 and player2 objects to gameStart\n\n// resetGame\n// receives -> null\n// returns -> null\n\n// moveTo\n// receives -> event (click), index from cliked cell, winstatus flag\n// function -> evaluates from winstatus if executes move function on board, or setwinner and finish game\n// returns -> null\n\n// Gameboard\n\n// GameLogic\n\n// DisplayController (dom manipulation) set-get data from DOM\n\n// extra-handler -- ??\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/player.js":
+/*!***********************!*\
+  !*** ./src/player.js ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst Player = (name, symbol) => {\n  const getName = () => name;\n  const getSymbol = () => symbol;\n  return { getName, getSymbol };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Player);\n\n\n//# sourceURL=webpack:///./src/player.js?");
 
 /***/ })
 
