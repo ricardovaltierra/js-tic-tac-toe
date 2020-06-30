@@ -1,4 +1,4 @@
-import Player from './player';
+import Player from '../src/player';
 
 test('it returns winner symbol X', () => { // Mockup required
   expect(Player.getName()).toBe("Name");

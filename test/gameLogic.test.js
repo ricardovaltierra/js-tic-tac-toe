@@ -1,4 +1,4 @@
-import GameLogic from './gameLogic';
+import GameLogic from '../src/gameLogic';
 
 // Mockup required
 

@@ -1,4 +1,4 @@
-import Gameboard from './gameboard';
+import Gameboard from '../src/gameboard';
 
 test('it returns player 1', () => { // Mockup required
   expect(Gameboard.getPlayer1()).toMatchObject(Player('Name', 'X'));
