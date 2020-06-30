@@ -1,9 +1,10 @@
 const Gameboard = (player1, player2) => {
   let board = [null, null, null, null, null, null, null, null, null];
 
-  const getPlayer2 = () => player2;
-
+  // test
   const getPlayer1 = () => player1;
+  // test
+  const getPlayer2 = () => player2;
 
   function winstatus() {
     const winner = [
