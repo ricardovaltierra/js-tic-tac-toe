@@ -1,3 +1,4 @@
+
 import "./assets/css/style.css";
 
 import { validatePlayers, sendAlert } from "./helperFunctions";
@@ -7,7 +8,9 @@ import {
   setPlayerName,
   hidePlayersName,
   showGameboard,
-  changeSubtitleLabel,
+  removePlayerLabel,
+  setSubtitleLabel,
+  showNewGameButton,
   displayTurn,
 } from "./domHandler";
 import Gameboard from "./gameboard";
@@ -23,7 +26,7 @@ function startGame() {
     setPlayerName(player1);
     hidePlayersName();
     showGameboard();
-    changeSubtitleLabel("Game Started");
+    setSubtitleLabel("Game Started");
   } else {
     sendAlert("Player's name can't be blank");
   }
@@ -45,10 +48,10 @@ function moveTo(e) {
       gboard.move(p1Move, indx);
       if (p1Move) {
         displayTurn(gboard.getPlayer1(), indx);
-        setPlayerName(gboard.getPlayer2().getName());
+        setPlayerName(gboard.getPlayer2());
       } else {
         displayTurn(gboard.getPlayer2(), indx);
-        setPlayerName(gboard.getPlayer1().getName());
+        setPlayerName(gboard.getPlayer1());
       }
       p1Move = !p1Move;
     } else {
@@ -57,8 +60,24 @@ function moveTo(e) {
   }
   winner = gboard.winstatus();
   if (winner) {
-    gboard.gameFinish(winner);
+    setSubtitleLabel(getFinalLabel(winner));
+    endGame();
   }
+}
+
+function getFinalLabel(winner){
+
+    if(winner === "It's a Tie!") {
+      return winner;
+    } else {
+      
+      return `YOU WIN ${getName(winner)}`; // Winner name
+    } 
+}
+
+function endGame() {
+  removePlayerLabel();
+  showNewGameButton();
 }
 
 function addAllListeners() {
@@ -81,37 +100,3 @@ function addAllListeners() {
 }
 
 addAllListeners();
-
-// Player
-// receives -> name, symbol
-// returns -> getName, getSymbol
-
-// validatePlayer
-// receives -> player1, player2
-// returns -> flag (player variables valid)
-
-// gameStart
-// receives -> player1, player2
-// function -> set gameboaard with players, clear board and set dom field
-// returns -> null
-
-// startGame
-// receives -> validatePlayer's flag
-// returns -> send player1 and player2 objects to gameStart
-
-// resetGame
-// receives -> null
-// returns -> null
-
-// moveTo
-// receives -> event (click), index from cliked cell, winstatus flag
-// function -> evaluates from winstatus if executes move function on board, or setwinner and finish game
-// returns -> null
-
-// Gameboard
-
-// GameLogic
-
-// DisplayController (dom manipulation) set-get data from DOM
-
-// extra-handler -- ??

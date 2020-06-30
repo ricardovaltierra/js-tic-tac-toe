@@ -46,6 +46,7 @@ const Gameboard = (player1, player2) => {
 
   const gameFinish = (winner) => {
     console.log(`gamefinish ${winner}`);
+    changeSubtitleLabel(`YOU WIN ${winner}`);
   };
 
   const validateMove = (index) => {

@@ -16,6 +16,11 @@ export function getP2(){
   return player;
 }
 
+export function removePlayerLabel(){
+  document.querySelector('.has-text-weight-bold.h3').textContent = "";
+}
+
+
 export function setPlayerName(player){
   document.querySelector('.current-player').textContent = player.getName();
 }
@@ -28,7 +33,11 @@ export function showGameboard(){
   document.querySelector('#game-board').classList.remove('hide');
 }
 
-export function changeSubtitleLabel(text){
+export function showNewGameButton(){
+  document.querySelector('#newgame').classList.remove('hide');
+}
+
+export function setSubtitleLabel(text){
   document.querySelector('#title-gameboard').textContent = text;
 }
 
