@@ -39,7 +39,7 @@ const Gameboard = (player1, player2) => {
     });
 
     if (!board.includes(null) && !whowin) {
-      whowin = "It's a Tie!";
+      whowin = "T";
     }
     return whowin;
   }
@@ -65,7 +65,11 @@ const Gameboard = (player1, player2) => {
     }
   }
 
-  return { getPlayer1, getPlayer2, winstatus, gameFinish, validateMove, move };
+  const clear = () => {
+    board = [null, null, null, null, null, null, null, null, null];
+  }
+
+  return { getPlayer1, getPlayer2, winstatus, gameFinish, validateMove, move, clear };
 };
 
 export default Gameboard;

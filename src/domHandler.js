@@ -16,10 +16,13 @@ export function getP2(){
   return player;
 }
 
-export function removePlayerLabel(){
-  document.querySelector('.has-text-weight-bold.h3').textContent = "";
+export function hidePlayerLabel(){
+  document.querySelector('.has-text-weight-bold.h3').classList.add("hide");
 }
 
+export function showPlayersLabel(){
+  document.querySelector('.has-text-weight-bold.h3').classList.remove("hide");
+}
 
 export function setPlayerName(player){
   document.querySelector('.current-player').textContent = player.getName();
@@ -37,6 +40,10 @@ export function showNewGameButton(){
   document.querySelector('#newgame').classList.remove('hide');
 }
 
+export function hideNewGameButton(){
+  document.querySelector('#newgame').classList.add('hide');
+}
+
 export function setSubtitleLabel(text){
   document.querySelector('#title-gameboard').textContent = text;
 }
@@ -49,4 +56,12 @@ export function displayTurn(player, index){
     elem.classList = "far fa-circle fa-7x";
   }
   document.querySelector(`#row-${index}`).appendChild(elem);
+}
+
+
+
+export function clearRows(){
+  for (let i = 0; i < 9; i += 1) {
+    document.getElementById(`row-${i}`).textContent = '';
+  }
 }

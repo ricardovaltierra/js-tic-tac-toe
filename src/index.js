@@ -1,4 +1,3 @@
-
 import "./assets/css/style.css";
 
 import { validatePlayers, sendAlert } from "./helperFunctions";
@@ -7,11 +6,14 @@ import {
   getP2,
   setPlayerName,
   hidePlayersName,
+  showPlayersLabel,
   showGameboard,
-  removePlayerLabel,
+  hidePlayerLabel,
   setSubtitleLabel,
   showNewGameButton,
   displayTurn,
+  hideNewGameButton,
+  clearRows,
 } from "./domHandler";
 import Gameboard from "./gameboard";
 
@@ -33,11 +35,42 @@ function startGame() {
 }
 
 function resetGame() {
-  console.log("resetGame");
+  showPlayersLabel();
+  hideNewGameButton();
+  setPlayerName(gboard.getPlayer1());
+  setSubtitleLabel("Game Started");
+  gboard.clear();
+  clearRows();
+  p1Move = true;
 }
 
 function newGame() {
-  console.log("newGame");
+  document.location.reload();
+}
+
+function getFinalLabel(winner) {
+  if (winner === "T") {
+    return "It's a Tie!";
+  } else {
+    if (winner === "O") {
+      if (gboard.getPlayer2().getSymbol() == "O") {
+        return "You WIN " + gboard.getPlayer2().getName();
+      } else {
+        return "You WIN " + gboard.getPlayer1().getName();
+      }
+    } else {
+      if (gboard.getPlayer2().getSymbol() == "X") {
+        return "You WIN " + gboard.getPlayer2().getName();
+      } else {
+        return "You WIN " + gboard.getPlayer1().getName();
+      }
+    }
+  }
+}
+
+function endGame() {
+  hidePlayerLabel();
+  showNewGameButton();
 }
 
 function moveTo(e) {
@@ -63,21 +96,6 @@ function moveTo(e) {
     setSubtitleLabel(getFinalLabel(winner));
     endGame();
   }
-}
-
-function getFinalLabel(winner){
-
-    if(winner === "It's a Tie!") {
-      return winner;
-    } else {
-      
-      return `YOU WIN ${getName(winner)}`; // Winner name
-    } 
-}
-
-function endGame() {
-  removePlayerLabel();
-  showNewGameButton();
 }
 
 function addAllListeners() {
