@@ -1,4 +1,4 @@
-import { validatePlayers, sendAlert } from "./helperFunctions";
+import { validatePlayers, sendAlert } from './helperFunctions';
 import {
   getP1,
   getP2,
@@ -12,22 +12,22 @@ import {
   displayTurn,
   hideNewGameButton,
   clearRows,
-} from "./domHandler";
-import Gameboard from "./gameboard";
+} from './domHandler';
+import Gameboard from './gameboard';
 
 const GameLogic = () => {
   let gboard;
   let p1Move = true;
 
   function startGame() {
-    let player1 = getP1();
-    let player2 = getP2();
+    const player1 = getP1();
+    const player2 = getP2();
     if (validatePlayers(player1, player2)) {
       gboard = Gameboard(player1, player2);
       setPlayerName(player1);
       hidePlayersName();
       showGameboard();
-      setSubtitleLabel("Game Started");
+      setSubtitleLabel('Game Started');
     } else {
       sendAlert("Player's name can't be blank");
     }
@@ -37,7 +37,7 @@ const GameLogic = () => {
     showPlayersLabel();
     hideNewGameButton();
     setPlayerName(gboard.getPlayer1());
-    setSubtitleLabel("Game Started");
+    setSubtitleLabel('Game Started');
     gboard.clear();
     clearRows();
     p1Move = true;
@@ -48,23 +48,19 @@ const GameLogic = () => {
   }
 
   function getFinalLabel(winner) {
-    if (winner === "T") {
+    if (winner === 'T') {
       return "It's a Tie!";
-    } else {
-      if (winner === "O") {
-        if (gboard.getPlayer2().getSymbol() == "O") {
-          return "You WIN " + gboard.getPlayer2().getName();
-        } else {
-          return "You WIN " + gboard.getPlayer1().getName();
-        }
-      } else {
-        if (gboard.getPlayer2().getSymbol() == "X") {
-          return "You WIN " + gboard.getPlayer2().getName();
-        } else {
-          return "You WIN " + gboard.getPlayer1().getName();
-        }
-      }
     }
+    if (winner === 'O') {
+      if (gboard.getPlayer2().getSymbol() === 'O') {
+        return `You WIN ${gboard.getPlayer2().getName()}`;
+      }
+      return `You WIN ${gboard.getPlayer1().getName()}`;
+    }
+    if (gboard.getPlayer2().getSymbol() === 'X') {
+      return `You WIN ${gboard.getPlayer2().getName()}`;
+    }
+    return `You WIN ${gboard.getPlayer1().getName()}`;
   }
 
   function endGame() {
@@ -72,7 +68,7 @@ const GameLogic = () => {
     showNewGameButton();
   }
 
-  function moveTo(e) {
+  function moveTo(event) {
     const indx = event.target.id.match(/\d+/)[0];
     let winner = gboard.winstatus();
     if (!winner) {
@@ -87,7 +83,7 @@ const GameLogic = () => {
         }
         p1Move = !p1Move;
       } else {
-        sendAlert("This place is already taken");
+        sendAlert('This place is already taken');
       }
     }
     winner = gboard.winstatus();
@@ -99,23 +95,23 @@ const GameLogic = () => {
 
   function addAllListeners() {
     document
-      .querySelector(".button.is-primary.is-inverted")
-      .addEventListener("click", startGame);
+      .querySelector('.button.is-primary.is-inverted')
+      .addEventListener('click', startGame);
     document
-      .querySelector(".button.is-danger.is-rounded")
-      .addEventListener("click", resetGame);
+      .querySelector('.button.is-danger.is-rounded')
+      .addEventListener('click', resetGame);
     document
-      .querySelector("#newgame .button")
-      .addEventListener("click", newGame);
-    document.getElementById("row-0").addEventListener("click", moveTo);
-    document.getElementById("row-1").addEventListener("click", moveTo);
-    document.getElementById("row-2").addEventListener("click", moveTo);
-    document.getElementById("row-3").addEventListener("click", moveTo);
-    document.getElementById("row-4").addEventListener("click", moveTo);
-    document.getElementById("row-5").addEventListener("click", moveTo);
-    document.getElementById("row-6").addEventListener("click", moveTo);
-    document.getElementById("row-7").addEventListener("click", moveTo);
-    document.getElementById("row-8").addEventListener("click", moveTo);
+      .querySelector('#newgame .button')
+      .addEventListener('click', newGame);
+    document.getElementById('row-0').addEventListener('click', moveTo);
+    document.getElementById('row-1').addEventListener('click', moveTo);
+    document.getElementById('row-2').addEventListener('click', moveTo);
+    document.getElementById('row-3').addEventListener('click', moveTo);
+    document.getElementById('row-4').addEventListener('click', moveTo);
+    document.getElementById('row-5').addEventListener('click', moveTo);
+    document.getElementById('row-6').addEventListener('click', moveTo);
+    document.getElementById('row-7').addEventListener('click', moveTo);
+    document.getElementById('row-8').addEventListener('click', moveTo);
   }
   return { addAllListeners };
 };

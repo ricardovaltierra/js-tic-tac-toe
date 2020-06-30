@@ -1,13 +1,9 @@
 const Gameboard = (player1, player2) => {
   let board = [null, null, null, null, null, null, null, null, null];
 
-  const getPlayer2 = () => {
-    return player2;
-  };
+  const getPlayer2 = () => player2;
 
-  const getPlayer1 = () => {
-    return player1;
-  };
+  const getPlayer1 = () => player1;
 
   function winstatus() {
     const winner = [
@@ -24,52 +20,48 @@ const Gameboard = (player1, player2) => {
 
     winner.forEach((element) => {
       if (
-        board[element[0]] === "X" &&
-        board[element[1]] === "X" &&
-        board[element[2]] === "X"
+        board[element[0]] === 'X'
+        && board[element[1]] === 'X'
+        && board[element[2]] === 'X'
       ) {
-        whowin = "X";
+        whowin = 'X';
       } else if (
-        board[element[0]] === "O" &&
-        board[element[1]] === "O" &&
-        board[element[2]] === "O"
+        board[element[0]] === 'O'
+        && board[element[1]] === 'O'
+        && board[element[2]] === 'O'
       ) {
-        whowin = "O";
+        whowin = 'O';
       }
     });
 
     if (!board.includes(null) && !whowin) {
-      whowin = "T";
+      whowin = 'T';
     }
     return whowin;
   }
 
-  const gameFinish = (winner) => {
-    console.log(`gamefinish ${winner}`);
-    changeSubtitleLabel(`YOU WIN ${winner}`);
-  };
-
   const validateMove = (index) => {
     if (board[index] === null) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   };
 
   const move = (turnP1, index) => {
-    if (turnP1){
+    if (turnP1) {
       board[index] = player1.getSymbol();
     } else {
       board[index] = player2.getSymbol();
     }
-  }
+  };
 
   const clear = () => {
     board = [null, null, null, null, null, null, null, null, null];
-  }
+  };
 
-  return { getPlayer1, getPlayer2, winstatus, gameFinish, validateMove, move, clear };
+  return {
+    getPlayer1, getPlayer2, winstatus, validateMove, move, clear,
+  };
 };
 
 export default Gameboard;
