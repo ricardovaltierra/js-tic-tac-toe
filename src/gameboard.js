@@ -60,12 +60,10 @@ const Gameboard = (player1, player2) => {
     board = [null, null, null, null, null, null, null, null, null];
   };
 
-  const getBoard = () => {
-    return board;
-  }
+  const getBoard = () => board;
 
   return {
-    getPlayer1, getPlayer2, winstatus, validateMove, move, clear, getBoard
+    getPlayer1, getPlayer2, winstatus, validateMove, move, clear, getBoard,
   };
 };
 

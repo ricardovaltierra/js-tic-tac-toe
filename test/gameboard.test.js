@@ -1,9 +1,9 @@
 import Gameboard from '../src/gameboard';
 import Player from '../src/player';
 
-let player1 = Player('Name',"X");
-let player2 = Player('Name2', 'O');
-let gboard = Gameboard(player1, player2);
+const player1 = Player('Name', 'X');
+const player2 = Player('Name2', 'O');
+const gboard = Gameboard(player1, player2);
 
 test('it returns player 1', () => {
   expect(JSON.stringify(gboard.getPlayer1())).toBe(JSON.stringify(Player('Name', 'X')));
@@ -35,17 +35,17 @@ test('it returns winner symbol O', () => {
 
 test('it return T for a tie', () => {
   gboard.clear();
-  gboard.move(true,0);
-  gboard.move(false,2);
-  gboard.move(true,1);
-  gboard.move(false,3);
-  gboard.move(true,5);
-  gboard.move(false,4);
-  gboard.move(true,6);
-  gboard.move(false,7);
-  gboard.move(true,8);
+  gboard.move(true, 0);
+  gboard.move(false, 2);
+  gboard.move(true, 1);
+  gboard.move(false, 3);
+  gboard.move(true, 5);
+  gboard.move(false, 4);
+  gboard.move(true, 6);
+  gboard.move(false, 7);
+  gboard.move(true, 8);
   expect(gboard.winstatus()).toMatch(/T/);
-})
+});
 
 test('it returns false (not valid move)', () => {
   gboard.clear();
@@ -70,6 +70,6 @@ test('it set array board position 3 with player 1 symbol', () => {
 test('it set array board position 0 with player2 symbol', () => {
   gboard.clear();
   gboard.move(true, 4);
-  gboard.move(false,0)
+  gboard.move(false, 0);
   expect(gboard.getBoard()).toStrictEqual(['O', null, null, null, 'X', null, null, null, null]);
 });
